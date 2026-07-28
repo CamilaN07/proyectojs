@@ -28,6 +28,13 @@ app.get("/productos/:categoria",(req,res)=> {
          <p>Categoría: ${categoria}</p>`);
 });
 
+//Productos-categoría(id)
+app.get("/productos/:categoria/:id",(req,res)=> {
+    const categoria= req.params.categoria;
+    const id= req.params.id;
+    res.send(`<h1>Producto</h1><p>Categoría: ${categoria}</p><p>ID: ${id}</p>`);
+});
+
 app.listen(puerto, ()=> {
     console.log(`Servidor http://localhost:${puerto}
         http://127.0.0.1:${puerto}`);
