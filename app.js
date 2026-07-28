@@ -35,6 +35,14 @@ app.get("/productos/:categoria/:id",(req,res)=> {
     res.send(`<h1>Producto</h1><p>Categoría: ${categoria}</p><p>ID: ${id}</p>`);
 });
 
+//Libros-isbn
+app.get("/Libros/:isbn",(req,res)=> {
+    const isbn= req.params.isbn;
+    res.send(`<h1>Libros</h1>
+        <p>ISBN: ${isbn}</p>`);
+});
+
+
 app.listen(puerto, ()=> {
     console.log(`Servidor http://localhost:${puerto}
         http://127.0.0.1:${puerto}`);
