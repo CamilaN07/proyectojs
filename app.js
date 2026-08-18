@@ -8,9 +8,15 @@ app.get("/", (req,res) => {
 })
  
 //listo para crear enpoint
+
 //enpoint para listar aprendices
 app.get("/api/aprendices", (req,res) => {
     res.json({ mensaje: "enpoint para listar aprendices"})
+})
+
+//enpoint para adicionar aprendices
+app.post("/api/aprendices", (req, res) => {
+    res.json({ mensaje: "aprendiz agregado" })
 })
 
 app.listen(PORT, ()=> {
