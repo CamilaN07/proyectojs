@@ -24,6 +24,11 @@ app.put("/api/aprendices/:id", (req, res) => {
     res.json({ mensaje: "aprendiz modificado" })
 })
 
+//enpoint para eliminar aprendices
+app.delete("/api/aprendices/:id", (req, res) => {
+    res.json({ mensaje: "aprendiz eliminado" })
+})
+
 app.listen(PORT, ()=> {
     console.log(`Servidor http://localhost:${PORT}
         http://127.0.0.1:${PORT}`);
