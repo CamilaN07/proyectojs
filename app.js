@@ -19,6 +19,11 @@ app.post("/api/aprendices", (req, res) => {
     res.json({ mensaje: "aprendiz agregado" })
 })
 
+//espoint para modificar aprendices
+app.put("/api/aprendices/:id", (req, res) => {
+    res.json({ mensaje: "aprendiz modificado" })
+})
+
 app.listen(PORT, ()=> {
     console.log(`Servidor http://localhost:${PORT}
         http://127.0.0.1:${PORT}`);
