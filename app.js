@@ -7,7 +7,8 @@ app.use(express.json())
 const sistemaArchivos = require("fs")
 const ruta = require("path")
 const PORT = process.env.PORT || 3500;
-
+//importar jsonwebtoken
+const jswtoken = require("jsonwebtoken")
 //importando mi middleware
 const registroMiddleware = require ("./middleware/registroMiddleware")
 const manejoErrores = require("./middleware/registroMiddleware")
@@ -92,7 +93,7 @@ app.delete("/api/aprendices/:id", (req, res) => {
 
 
 //enpoint para probocar un error
-app.get("/error", (re, res, next) => {
+app.get("/error", (req, res, next) => {
     next(new Error("Error provocado, intencional"))
 })
 
@@ -101,9 +102,29 @@ app.get("/error", (re, res, next) => {
   //  console.log(`Tiempo en milisegundos: ${Date.now()}`)
     //next()
 // })
-app.get("/rutaProtegida", (req, res)=>{
-    req.send("Ruta protegida")
+
+   app.get("/rutaprotegida", autenticacion, (req, res) => {
+     res.json({ mensaje: "Acceso concedido" })
+   })
+
+   //endpoint inicio de sesion
+app.post("/login", (req, res)=>{
+    //capturar datos del usuario
+    const {usuario, clave} = req.body//simular datos del usuario de una bd
+    const datoUsuario = {"usuarioBd": "camila", "clave":"abc123"}
+    //validar datos de usuario
+    if (usuario !== datoUsuario.usuarioBd || clave == datoUsuario.clave){
+        res.status(400).json({mensaje: "Credenciales incorrectas"})
+    }
+    //generar y verificar 
+    const token = jswtoken.sign(
+        {usuario: usuario},
+        process.env.JWT_SECRETO,
+        {expiresIn: "1h"}
+    )
+    res.json(token)
 })
+
 
 // Modo de escucha del servidor
 app.listen(PORT, ()=> {
